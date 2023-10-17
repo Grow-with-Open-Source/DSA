@@ -1,0 +1,13 @@
+{
+  "{init}": {
+    "contributor-name": [
+      "iamwatchdogs"
+    ],
+    "core": "Repo",
+    "specificity": "Initialize",
+    "pull-request-number": [
+      "1"
+    ],
+    "demo-path": "https://github.com/Grow-with-Open-Source/DSA"
+  }
+}
