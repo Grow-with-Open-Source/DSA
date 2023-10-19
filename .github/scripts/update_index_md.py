@@ -5,10 +5,6 @@ import sys
 import json
 from collections import OrderedDict
 
-# --- Only for testing ---
-os.environ['REPO_NAME'] = 'Grow-with-Open-Source/DSA'
-# --- Only for testing ---
-
 '''
 This script requires following environment variables:
 
