@@ -15,11 +15,6 @@ This script requires following environment variables:
   > GitHub action variable: ${{ github.event.pull_request.number }}
 '''
 
-# Testing with predefined evroniment
-os.environ['REPO_NAME'] = 'Grow-with-Open-Source/DSA'
-os.environ['PR_NUMBER'] = '3'
-# Testing with predefined evroniment
-
 def get_contribution_title(CURRENT_PR):
 	
 	# Setting default value
