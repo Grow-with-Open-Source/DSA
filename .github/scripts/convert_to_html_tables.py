@@ -236,8 +236,7 @@ class UpdateFileContent:
 					updated_lines.append(f'\t\t<ul>\n')
 					updated_lines.append(f'\t\t\t<li><a href="{core}/{heading}" title="goto {heading}">{heading}</a></li>\n')
 				else:
-					updated_lines.append(f'\t<ul>\n')
-					updated_lines.append(f'\t\t<li><a href="{heading}" title="goto {heading}">{heading}</a></li>\n')
+					updated_lines.append(f'\t<li><a href="{heading}" title="goto {heading}">{heading}</a></li>\n')
 				if sub_heading_list is not None:
 					for sub_heading in sub_heading_list:
 						if condition is None:
@@ -245,13 +244,11 @@ class UpdateFileContent:
 							updated_lines.append(f'\t\t\t\t<li><a href="{core}/{heading}/{sub_heading}" title="goto {sub_heading}">{sub_heading}</a></li>\n')
 							updated_lines.append(f'\t\t\t</ul>\n')
 						else:
-							updated_lines.append(f'\t\t<ul>\n')
-							updated_lines.append(f'\t\t\t<li><a href="{heading}/{sub_heading}" title="goto {sub_heading}">{sub_heading}</a></li>\n')
-							updated_lines.append(f'\t\t</ul>\n')
+							updated_lines.append(f'\t<ul>\n')
+							updated_lines.append(f'\t\t<li><a href="{heading}/{sub_heading}" title="goto {sub_heading}">{sub_heading}</a></li>\n')
+							updated_lines.append(f'\t</ul>\n')
 				if condition is None:
 					updated_lines.append(f'\t\t</ul>\n')
-				else:
-					updated_lines.append(f'\t</ul>\n')
 
 		# Updating the lines with updated data
 		self.lines[table_of_content_start+1:table_of_content_end] = table_of_content_header + updated_lines + table_of_content_footer
