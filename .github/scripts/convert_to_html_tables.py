@@ -116,6 +116,10 @@ class UpdateFileContent:
 		# Initializing empty list for lines
 		updated_lines = list()
 
+		# checking for entries
+		has_at_least_one_entry = False
+
+
 		# Iterating over log to update target file
 		for title, details in self.DATA.items():
 
@@ -155,6 +159,19 @@ class UpdateFileContent:
 			updated_lines.append(f'\t\t<td>{contributors_names_output}</td>\n')
 			updated_lines.append(f'\t\t<td>{pull_requests_output}</td>\n')
 			updated_lines.append(f'\t\t<td>{demo_path_output}</td>\n')
+			updated_lines.append(f'\t</tr>\n')
+
+			has_at_least_one_entry = True
+
+		# Adding null values if table is completely empty
+		if not has_at_least_one_entry:
+			updated_lines.append('\t<tr align="center">\n')
+			updated_lines.append(f'\t\t<td>-</td>\n')
+			if condition is None:
+				updated_lines.append(f'\t\t<td>-</td>\n')
+			updated_lines.append(f'\t\t<td>-</td>\n')
+			updated_lines.append(f'\t\t<td>-</td>\n')
+			updated_lines.append(f'\t\t<td>-</td>\n')
 			updated_lines.append(f'\t</tr>\n')
 		
 		# Table footer
