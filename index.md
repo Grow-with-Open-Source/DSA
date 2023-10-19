@@ -5,19 +5,21 @@ Welcome to **Data Structures and Algorithms**, your friendly initiation into the
 # Table of Content
 
 <!-- TABLE OF CONTENT BEGINS -->
+- [__Theory__](Theory "goto Theory")
+- [__Solved-Problems__](Solved-Problems "goto Solved-Problems")
 <!-- TABLE OF CONTENT ENDS -->
-
-<br>
 
 # Table of Contribution
 
 <div align="center">
 
 <!-- TABLE OF CONTRIBUTORS BEGINS -->
+| Contribution Title | Core Contribution | Contributor Names | Pull Requests | Demo |
+| --- | --- | --- | --- | --- |
+| {init} | [Repo](Repo "goto Repo") | [iamwatchdogs](https://github.com/iamwatchdogs "goto iamwatchdogs profile") | [#1](https://github.com/Grow-with-Open-Source/DSA/pull/1 "visit pr #1") | [/Grow-with-Open-Source/DSA/](https://github.com/Grow-with-Open-Source/DSA "view the result of {init}") |
 <!-- TABLE OF CONTRIBUTORS ENDS -->
 
 </div>
-<br>
 
 # Thank you Contributors
 
