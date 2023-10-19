@@ -240,8 +240,10 @@ def main():
 
 	# Setting path for the log JSON file
 	ROOT_INDEX_FILE_PATH = 'index.md'
-	THEORY_INDEX_FILE_PATH = 'Theory/README.md'
-	SOLVED_PROBLEM_INDEX_FILE_PATH = 'Solved-Problems/README.md'
+	THEORY_INDEX_FILE_PATH = 'Theory/index.md'
+	THEORY_README_FILE_PATH = 'Theory/README.md'
+	SOLVED_PROBLEM_INDEX_FILE_PATH = 'Solved-Problems/index.md'
+	SOLVED_PROBLEM_README_FILE_PATH = 'Solved-Problems/README.md'
 	CONTRIBUTORS_LOG = '.github/data/contributors-log.json'
 
 	# Retrieving data from log file
@@ -255,7 +257,9 @@ def main():
 	# Updating All required files
 	UpdateFileContent(ROOT_INDEX_FILE_PATH)
 	UpdateFileContent(THEORY_INDEX_FILE_PATH, lambda core: core == 'Theory')
+	UpdateFileContent(THEORY_README_FILE_PATH, lambda core: core == 'Theory')
 	UpdateFileContent(SOLVED_PROBLEM_INDEX_FILE_PATH, lambda core: core == 'Solved-Problems')
+	UpdateFileContent(SOLVED_PROBLEM_README_FILE_PATH, lambda core: core == 'Solved-Problems')
 
 if __name__ == '__main__':
 	main()
