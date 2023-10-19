@@ -130,8 +130,8 @@ class UpdateFileContent:
 			contributors_names_output = ', '.join(contributors_names_list)
 
 			# Processing core contribution
+			core_contribution = details['core']
 			if condition is None:
-				core_contribution = details['core']
 				core_contribution_output = f'[{core_contribution}]({core_contribution} "goto {core_contribution}")'
 
 			# Processing pull-requests
@@ -141,9 +141,10 @@ class UpdateFileContent:
 
 			# Processing demo-path
 			demo_path = details['demo-path']
+			specificity = details['specificity']
 			if ' ' in demo_path:
 				demo_path = '%20'.join(demo_path.split())
-			demo_path_output = f'[/{self.REPO_NAME}/{title}/]({demo_path} "view the result of {title}")'
+			demo_path_output = f'[./{core_contribution}/{specificity}/]({demo_path} "view the result of {title}")'
 			if title == 'root' or title == '{init}':
 				demo_path_output = f'[/{self.REPO_NAME}/]({demo_path} "view the result of {title}")'
 
@@ -195,7 +196,7 @@ class UpdateFileContent:
 		for core, data in table_of_content.items():
 
 			# Modifying based on condition
-			if condition is not None and not condition(core):
+			if condition is not None and not condition(core) or core == 'Repo':
 				continue
 
 			# Setting Main Heading (Only for Root)
