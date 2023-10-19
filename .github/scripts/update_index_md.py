@@ -107,15 +107,16 @@ class UpdateFileContent:
 			if condition is None:
 				table_header.append('| Contribution Title | Core Contribution | Contributor Names | Pull Requests | Demo |\n')
 				table_header.append('| --- | --- | --- | --- | --- |\n')
-				table_header.append('| - | - | - | - | - |\n')
 			else:
 				table_header.append('| Contribution Title | Contributor Names | Pull Requests | Demo |\n')
 				table_header.append('| --- | --- | --- | --- |\n')
-				table_header.append('| - | - | - | - |\n')
 			self.lines[table_of_contributors_start+1:table_of_contributors_end] = table_header
 
 		# Initializing empty list for lines
 		updated_lines = list()
+
+		# Checking for min entries
+		has_at_least_one_entry = False
 
 		# Iterating over log to update target file
 		for title, details in self.DATA.items():
@@ -153,6 +154,15 @@ class UpdateFileContent:
 				updated_lines.append(f'| {title} | {core_contribution_output} | {contributors_names_output} | {pull_requests_output} | {demo_path_output} |\n')
 			else:
 				updated_lines.append(f'| {title} | {contributors_names_output} | {pull_requests_output} | {demo_path_output} |\n')
+
+			has_at_least_one_entry = True
+
+		# Adding null entries for completely empty table
+		if not has_at_least_one_entry:
+			if condition is None:
+				updated_lines.append('| - | - | - | - | - |\n')
+			else:
+				updated_lines.append('| - | - | - | - |\n')
 
 		# Updating the lines with updated data
 		self.lines[table_of_contributors_start+3:table_of_contributors_end] = updated_lines
