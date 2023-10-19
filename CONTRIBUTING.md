@@ -15,7 +15,7 @@ So, before you jump right into your code editor and start working on your projec
 - Most of the time you'll be contributing either the theory writing or the problem you have solved in different platform, rather than the default files present within the repo. So, Make sure you **do not add/remove/modify any content present with the default files**.
 
   > [!IMPORTANT] 
-  > - If any such changes are to be found within your Pull Request *(PR)*, then it will be **rejected** i.e., until and unless it's mentioned on an [Issue](https://github.com/Grow-with-Open-Source/Java-Projects/issues "goto issues tab").
+  > - If any such changes are to be found within your Pull Request *(PR)*, then it will be **rejected** i.e., until and unless it's mentioned on an [Issue](https://github.com/Grow-with-Open-Source/DSA/issues "goto issues tab").
   > - If you wish to work on default file *(either to update or fix a bug)*, create an issue first and get assigned to the issue to let others know that  the issue has been recorded and you've already begun working on it.
 
 - Also, your code will be linted automatically as soon as you make the PR. The PR will be merged if and only if all the checks are completed. If there's any issue with the linting of your work, you can contact the maintainer within the conversation tab of your PR.
@@ -152,50 +152,94 @@ So, before you jump right into your code editor and start working on your projec
   > └── README.md
   > ```
 
-- All of the main content of this repo lies within the `Theory` and `Solved-Problems` directory. All of your writing content will go down to `Theory` directory and all your solved problem will go to `Solved-Problem` directory.
+- All of the main content of this repo lies within the `Theory` and `Solved-Problems` directory. All of your content writing will go down to `Theory` directory and all your solved problem will go to `Solved-Problem` directory.
 
-- 
+- It's important to keep all the files in order (like, all you content writing to `Theory` directory and all you solutions to 'Solved-Problems` directory`).
 
-- Before you begin with your project contribution, make sure you create a new directory *(or)* folder within the repo with your project name.
+- If you wish to work on already present directories then don't change any of its file hierarchy *(or)* file structure.
+  
+- But if you wish contribute something which is not present by the time your fork this repo, then reate a new directory *(or)* folder within the respective directories *(i.e., either `Theory` or `Solved-Problems`)* with your topic name *(it can be DSA topic name or problem name)* by following the naming convension.
 
-  > [!NOTE]
-  > It's suggested to use any of the following naming conventions for the directory *(or)* folder:
-  > 
-  > | Format | Example |
-  > | :---: | :---: |
-  > | Separated with dashes | `/my-project-name/` |
-  > | Separated with underscores | `/my_project_name/` |
-  >
-  > Note that you can also use spaces *(like `/my project name/`)* but it's recommended to use any of the above-mentioned naming conversions.
+  > [!IMPORTANT]
+  > Unlike other repo, we are very serious about naming convension for your directories.
+  > We except you to follow the following naming convension to avoid duplication and other possible errors:
+  > - Directory names should follow the camel casing while each word is sepreated by dashes *(-)*.
+  >   - For example, `Linked-List` instead of `linked list` **(since the linked-list is DSA topic, it should be present within `Theory` directory)**.
+  >   - For example, `Longest-Palindromic-Substring` instead of `Longest_palindromic_substring`
+*(since this a problem name, it should be present within `Solved-Problems` directory)*
 
-- You can write simple docs for your project using [markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax "visit official GitHub Markdown Docs"). You can write descriptions, add screenshots or even upload a video. **Just make sure documentation is done within files named `README.md` *(or)* `index.md`**
+- You're pull request will not be accepted if you're not mentioned file structure or naming conversion. This is crucial to eliminate the issue of duplication, automation and other issues.
 
-- Even if you're project is small, try to keep it organized by keeping related files within their directories/folders
+- The duplication might beacome one of the major issue while contributing the solution for DSA-related problems you have solved, that is why we insist you to follow the mentioned naming convension.
+
+- Also for people who wish to contribute their own answer for the problem which was already solved by someone else, please keep your solution within the same directory of the problem statement. Make sure your either using different programming language or using different approach when compared to the one that is already present.
+
+- You can also document your approach for the problem using [markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax "visit official GitHub Markdown Docs"). You can write descriptions, add screenshots or even upload a video. **Just make sure documentation is done within files named `README.md` *(or)* `index.md`**
+
+- Here is a sample file structure if you contributing the DSA-related problem that you have solved:
+  ```
+  /DSA/
+  |
+  ├── <Default-files>
+  └── Solved-Problems
+          ├── <your-problem-statment>
+          |   ├── <your-solution-files>
+          |   └── README.md
+          └── README.md
+  ```
 
   <details>
   <summary>Here's an sample example</summary>
   <div>
   
   ```
-  /Java-Projects/
+  /DSA/
   |
   ├── <Default-files>
-  └── <your-project-name>
-          ├── .pmd
-          |   └── pmd_rules.xml
-          ├── .settings
-          |   ├── org.eclipse.jdt.core.prefs
-          |   └── org.eclipse.core.resources.prefs
-          ├── docs
-          |   └── <generated-javadocs>
-          ├── src
-          |   └── <project-package-name>
-          |           └── <all-java-source-code>  
+  └── Solved-Problems
+          ├── Trapping-Rain-Water         # This is important
+          |   ├── trapping-rain-water.py  # you can name you file anything you want
+          |   └── README.md               # you can also document your approach
           └── README.md
   ```
   
-  > [!NOTE]
-  > Note that this is an example to give you an idea of organizing files, no need to follow the exact pattern. You can come up with your own hierarchy based on your requirements.
+  </div>
+  </details>
+
+- As for DSA-related content writing will be done within the `Theory` directory *(as mentioned above)*. All the documentation will be done using the same [markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax "visit official GitHub Markdown Docs") language that is used for documenting the problems you have solved *(as mentioned in the previous point)*
+
+- All you content writing will be done within the `README.md` files of the respective topic directory using markdown langauge.
+
+- Here is a sample file structure if you contributing the DSA-related topic *(in other words, content writing)*:
+  ```
+  /DSA/
+  |
+  ├── <Default-files>
+  └── Theory
+          ├── <topic-name>
+          |   ├── <sub-topic-name>
+          |   |   └── README.md
+          |   └── README.md
+          └── README.md
+  ```
+
+  <details>
+  <summary>Here's an sample example</summary>
+  <div>
+  
+  ```
+  /DSA/
+  |
+  ├── <Default-files>
+  └── Theory
+          ├── Linked-List
+          |   └── README.md       # you can contribute directly related to topic
+          ├── Sorting
+          |   ├── Bubble-Sort     # you can contribute to the sub-topic of the main topic
+          |   |   └── README.md   # All you content will be in markdown language
+          |   └── README.md
+          └── README.md
+  ```
   
   </div>
   </details>
@@ -206,15 +250,15 @@ Now that you have a basic understanding of this repo, let's talk a bit about the
 
 - **Step 1:** You start you setting up the environment [*(as discussed above)*](#setting-up-environment).
 
-- **Step 2:** Now start by [forking](https://github.com/Grow-with-Open-Source/Java-Projects/fork "let's fork the repo") the repository.
+- **Step 2:** Now start by [forking](https://github.com/Grow-with-Open-Source/DSA/fork "let's fork the repo") the repository.
 
 - **Step 3:** Clone the forked repository to your local machine.
   ```bash
   #cloning the repo
-  git clone https://github.com/<your-github-user-name>/Java-Projects.git
+  git clone https://github.com/<your-github-user-name>/DSA.git
   
   #entering the project directory
-  cd Java-Projects
+  cd DSA
   ```
 
 - **Step 4:** Create a new branch to work on your contribution. use the following command:
@@ -249,7 +293,7 @@ Now that you have a basic understanding of this repo, let's talk a bit about the
   git push origin <your-branch-name>
   ```
 
-- **Step 8:** Now, create a pull request to the [original repo](https://github.com/Grow-with-Open-Source/Java-Projects). [Learn about Pull requests](https://docs.github.com/articles/using-pull-requests "official GitHub documentation")
+- **Step 8:** Now, create a pull request to the [original repo](https://github.com/Grow-with-Open-Source/DSA). [Learn about Pull requests](https://docs.github.com/articles/using-pull-requests "official GitHub documentation")
 
 - **Step 9:** After creating the pull request wait till the linting checks are done, if there's any issue with your Java code then the checks won't pass. And if the checks won't pass you have to fix the errors, you can check the linting workflow to know where the error occurred. If you need any help, you can contact the maintainer within the PR.
 
