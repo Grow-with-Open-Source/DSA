@@ -3,6 +3,11 @@
 import os
 import sys
 import json
+from collections import OrderedDict
+
+# --- Only for testing ---
+os.environ['REPO_NAME'] = 'Grow-with-Open-Source/DSA'
+# --- Only for testing ---
 
 '''
 This script requires following environment variables:
@@ -13,13 +18,16 @@ This script requires following environment variables:
 '''
 
 class UpdateFileContent:
-	"""Class that updates root `index.md` based on contributors-log."""
+	"""Class that updates `index.md` based on contributors-log."""
 
-	# Setting static variables\
+	# Setting static variables
 	DATA = None
 	REPO_NAME = None
 
-	def __init__(self, FILE_PATH):
+	def __init__(self, FILE_PATH, condition=None):
+
+		# Displaying starting Message
+		print(f'\n--- Updating {FILE_PATH} ---\n')
 
 		# Setting Constant values
 		self.FILE_PATH = FILE_PATH
@@ -28,8 +36,8 @@ class UpdateFileContent:
 		self.lines = self.get_lines()
 
 		# Updates lines based on the data
-		self.update_table_of_contributors()
-		self.update_table_of_content()
+		self.update_table_of_contributors(condition)
+		self.update_table_of_content(condition)
 
 		# Updating target file content
 		self.write_lines_into_file()
@@ -42,7 +50,7 @@ class UpdateFileContent:
 			lines = file.readlines()
 
 		return lines
-	
+
 	def write_lines_into_file(self):
 
 		# Updating the target file
@@ -53,15 +61,15 @@ class UpdateFileContent:
 		print(f"Updated '{self.FILE_PATH}' Successfully")
 
 	def find_table_points(self, search_type):
-	
+
 		# Setting default return values
 		table_starting_point = None
 		table_ending_point = None
-		
+
 		# Setting default markers
 		table_start_marker = None
 		table_end_marker = None
-		
+
 		# Selecting respective markers based on `search-type`
 		if search_type == 'contributors':
 			table_start_marker = '<!-- TABLE OF CONTRIBUTORS BEGINS -->'
@@ -72,7 +80,7 @@ class UpdateFileContent:
 		else:
 			print('Invalid Argument', file=sys.stderr)
 			exit(1)
-			
+
 		# Iterating over lines to find the markers
 		for index, line in enumerate(self.lines):
 			if table_starting_point is None and table_start_marker in line:
@@ -81,7 +89,7 @@ class UpdateFileContent:
 				table_ending_point = index
 			if table_starting_point is not None and table_ending_point is not None:
 				break
-			
+
 		# Checking for possible errors
 		if table_starting_point is None or table_ending_point is None:
 			print('Table not found in the file.', file=sys.stderr)
@@ -92,18 +100,24 @@ class UpdateFileContent:
 
 		return (table_starting_point, table_ending_point)
 
-	def update_table_of_contributors(self, condition=None):
-		
+	def update_table_of_contributors(self, condition):
+
 		# Calculating stating and ending points of the targeted table
 		table_of_contributors_start, table_of_contributors_end = self.find_table_points('contributors')
 
 		# Creating table header if doesn't exist
 		if table_of_contributors_end - table_of_contributors_start == 1:
 			table_header = list()
-			table_header.append('| Contribution Title | Contributor Names | Pull Requests | Demo |\n')
-			table_header.append('| --- | --- | --- | --- |\n')
+			if condition is None:
+				table_header.append('| Contribution Title | Core Contribution | Contributor Names | Pull Requests | Demo |\n')
+				table_header.append('| --- | --- | --- | --- | --- |\n')
+				table_header.append('| - | - | - | - | - |\n')
+			else:
+				table_header.append('| Contribution Title | Contributor Names | Pull Requests | Demo |\n')
+				table_header.append('| --- | --- | --- | --- |\n')
+				table_header.append('| - | - | - | - |\n')
 			self.lines[table_of_contributors_start+1:table_of_contributors_end] = table_header
-	
+
 		# Initializing empty list for lines
 		updated_lines = list()
 
@@ -111,13 +125,18 @@ class UpdateFileContent:
 		for title, details in self.DATA.items():
 
 			# Modifying based on condition
-			if condition is not None and not condition(details):
+			if condition is not None and not condition(details['core']):
 				continue
 
 			# Processing contributors-names
 			contributors_names = details['contributor-name']
 			contributors_names_list = [f'[{name}](https://github.com/{name} "goto {name} profile")' for name in contributors_names]
 			contributors_names_output = ', '.join(contributors_names_list)
+
+			# Processing core contribution
+			if condition is None:
+				core_contribution = details['core']
+				core_contribution_output = f'[{core_contribution}]({core_contribution} "goto {core_contribution}")'
 
 			# Processing pull-requests
 			pull_requests = details['pull-request-number']
@@ -133,18 +152,78 @@ class UpdateFileContent:
 				demo_path_output = f'[/{self.REPO_NAME}/]({demo_path} "view the result of {title}")'
 
 			# Appending all data together
-			updated_lines.append(f'| {title} | {contributors_names_output} | {pull_requests_output} | {demo_path_output} |\n')
+			if condition is None:
+				updated_lines.append(f'| {title} | {core_contribution_output} | {contributors_names_output} | {pull_requests_output} | {demo_path_output} |\n')
+			else:
+				updated_lines.append(f'| {title} | {contributors_names_output} | {pull_requests_output} | {demo_path_output} |\n')
 
 		# Updating the lines with updated data
 		self.lines[table_of_contributors_start+3:table_of_contributors_end] = updated_lines
 
 		# Printing Success Message
 		print('Successfully updated the contributor details !!!...')
-		
-	def update_table_of_content(self):
-		
+
+	def update_table_of_content(self, condition):
+
 		# Calculating stating and ending points of the targeted table
 		table_of_content_start, table_of_content_end = self.find_table_points('table-of-content')
+
+		# Initializing required variables
+		updated_lines = list()
+		table_of_content = { 'Theory': {}, 'Solved-Problems': {}, 'Repo': {} }
+
+		# Extracting data into required format
+		for title, data in self.DATA.items():
+
+			# Setting values for ease of use and more readibility
+			core = data['core']
+			specificity = data['specificity']
+
+			# Sorting out required data
+			if specificity not in table_of_content[core]:
+				table_of_content[core][specificity] = None if specificity == title else [title]
+			elif title != specificity and title not in table_of_content[core][specificity]:
+				if table_of_content[core][specificity] is None:
+					table_of_content[core][specificity] = [title]
+				else:
+					table_of_content[core][specificity].append(title)
+
+		# Sorting extracted data
+		for key, value in table_of_content.items():
+			for sub_value in value.values():
+				if type(sub_value) == list:
+					sub_value.sort()
+			table_of_content[key] = OrderedDict(sorted(value.items()))
+
+		# Updating lines based on the extracted data
+		for core, data in table_of_content.items():
+
+			# Modifying based on condition
+			if condition is not None and not condition(core):
+				continue
+
+			# Setting Main Heading (Only for Root)
+			if condition is None:
+				updated_lines.append(f'- [__{core}__]({core} "goto {core}")\n')
+
+			# Adding all headings
+			for  heading, sub_heading_list in data.items():
+				if condition is None:
+					updated_lines.append(f'\t- [{heading}]({core}/{heading} "goto {heading}")\n')
+				else:
+					updated_lines.append(f'- [__{heading}__]({heading} "goto {heading}")\n')
+				if sub_heading_list is not None:
+					for sub_heading in sub_heading_list:
+						if condition is None:
+							updated_lines.append(f'\t\t- [{sub_heading}]({core}/{heading}/{sub_heading} "goto {sub_heading}")\n')
+						else:
+							updated_lines.append(f'\t- [{sub_heading}]({heading}/{sub_heading} "goto {sub_heading}")\n')
+
+		# Updating the lines with updated data
+		self.lines[table_of_content_start+1:table_of_content_end] = updated_lines
+
+		# Printing Success Message
+		print('Successfully updated the table of content !!!...')
 
 
 def main():
@@ -154,8 +233,8 @@ def main():
 
 	# Setting path for the log JSON file
 	ROOT_INDEX_FILE_PATH = 'index.md'
-	THEORY_INDEX_FILE_PATH = 'Theory/index.md'
-	SOLVED_PROBLEM_INDEX_FILE_PATH = 'Solved-Problems/index.md'
+	THEORY_INDEX_FILE_PATH = 'Theory/README.md'
+	SOLVED_PROBLEM_INDEX_FILE_PATH = 'Solved-Problems/README.md'
 	CONTRIBUTORS_LOG = '.github/data/contributors-log.json'
 
 	# Retrieving data from log file
@@ -166,12 +245,10 @@ def main():
 	UpdateFileContent.DATA = DATA
 	UpdateFileContent.REPO_NAME = REPO_NAME
 
-	# Updating root index file
+	# Updating All required files
 	UpdateFileContent(ROOT_INDEX_FILE_PATH)
-	UpdateFileContent(THEORY_INDEX_FILE_PATH)
-	UpdateFileContent(SOLVED_PROBLEM_INDEX_FILE_PATH)
-	
-
+	UpdateFileContent(THEORY_INDEX_FILE_PATH, lambda core: core == 'Theory')
+	UpdateFileContent(SOLVED_PROBLEM_INDEX_FILE_PATH, lambda core: core == 'Solved-Problems')
 
 if __name__ == '__main__':
 	main()
