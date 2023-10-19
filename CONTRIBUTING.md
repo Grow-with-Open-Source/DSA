@@ -184,6 +184,7 @@ So, before you jump right into your code editor and start working on your projec
   └── Solved-Problems
           ├── <your-problem-statment>
           |   ├── <your-solution-files>
+          |   ├── index.md
           |   └── README.md
           └── README.md
   ```
@@ -200,6 +201,7 @@ So, before you jump right into your code editor and start working on your projec
           ├── Trapping-Rain-Water         # This is important
           |   ├── trapping-rain-water.py  # you can name you file anything you want
           |   └── README.md               # you can also document your approach
+          ├── index.md
           └── README.md
   ```
   
