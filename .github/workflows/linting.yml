@@ -1,0 +1,120 @@
+name: linter
+
+on:
+ pull_request:
+    branches: [main]
+
+permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+jobs:
+ checkout:
+    name: checkout
+    runs-on: ubuntu-latest
+    outputs:
+      needs_c_cpp_linting: ${{ steps.check_extension.outputs.c_cpp }}
+      needs_java_linting: ${{ steps.check_extension.outputs.java}}
+      needs_javascript_linting: ${{ steps.check_extension.outputs.javascript }}
+      needs_python_linting: ${{ steps.check_extension.outputs.python }}
+      needs_other_linting: ${{ steps.check_extension.outputs.other }}
+    steps:
+    - name: Checking out the repo
+      uses: actions/checkout@v4.1.1
+    - name: Setup Python
+      uses: actions/setup-python@v4.7.1
+    - name: Fetching PR Details
+      run: |
+          touch pr.json
+          gh pr view $PR_NUMBER --json files > pr.json
+      env:
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checking file extensions
+      id: check_extension
+      uses: jannekem/run-python-script-action@v1
+      with:
+        script: |
+          import os
+          import json
+
+          # Setting default variables
+          checks = { lang:'false' for lang in ['c_cpp', 'java', 'javascript', 'python', 'other'] }
+          c_cpp_ext = ['.c', '.cpp', '.h', '.hpp', '.cc', '.hh', '.cxx', '.hxx']
+
+          # Reading contents of PR
+          with open('pr.json','r') as json_file:
+            data = json.load(json_file)
+
+            # Iterating over data
+            for file in data["files"]:
+              path = file["path"]
+              
+              # Ending loop if all are 'true'
+              if all([val == 'true' for val in checks.values()]):
+                break
+
+              # Checking for extensions
+              if os.path.exists(path):
+                for key,value in checks.items():
+                  if value == 'true':
+                    continue
+                  if any([path.endswith(ext) for ext in c_cpp_ext]):
+                    checks['c_cpp']='true'
+                  elif path.endswith('.java'):
+                    checks['java']='true'
+                  elif path.endswith('.js'):
+                    checks['javascript']='true'
+                  elif path.endswith('.py'):
+                    checks['python']='true'
+                  elif '.' in path.split('/')[-1] and not path.endswith('.md'):
+                    checks['other']='true'
+
+          # Setting output variables based on file extensions
+          for lang,val in checks.items():
+            os.system(f'echo "{lang}={val}" >> "$GITHUB_OUTPUT"')
+
+ c-cpp-linter:
+    needs: [checkout]
+    if: ${{ needs.checkout.outputs.needs_c_cpp_linting == 'true' }}
+    uses: Grow-with-Open-Source/C-CPP-Projects/.github/workflows/c-cpp-linter.yml@main
+
+ java-linter:
+    needs: [checkout]
+    if: ${{ needs.checkout.outputs.needs_java_linting == 'true' }}
+    uses: Grow-with-Open-Source/Java-Projects/.github/workflows/java-linter.yml@main
+
+ javascript-linter:
+    needs: [checkout]
+    if: ${{ needs.checkout.outputs.needs_javascript_linting == 'true' }}
+    uses: Grow-with-Open-Source/Javascript-Projects/.github/workflows/javascript-linter.yml@main
+
+ python-linter:
+    needs: [checkout]
+    if: ${{ needs.checkout.outputs.needs_python_linting == 'true' }}
+    uses: Grow-with-Open-Source/Python-Projects/.github/workflows/python-linter.yml@main
+  
+ other-linter:
+    needs: [checkout, c-cpp-linter, java-linter, javascript-linter, python-linter]
+    if: ${{ 
+            always() &&
+            needs.checkout.outputs.needs_other_linting == 'true' ||
+            ((needs.c-cpp-linter.result == 'skipped' || needs.checkout.outputs.needs_c_cpp_linting == 'false') &&
+            (needs.java-linter.result == 'skipped' || needs.checkout.outputs.needs_java_linting == 'false') &&
+            (needs.javascript-linter.result == 'skipped' || needs.checkout.outputs.needs_javascript_linting == 'false') &&
+            (needs.python-linter.result == 'skipped' || needs.checkout.outputs.needs_python_linting == 'false'))
+          }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checking out the repo
+      uses: actions/checkout@v4.1.1
+      with:
+       fetch-depth: 0
+       ref: ${{ github.event.pull_request.head.ref }}
+    - name: Super Linter
+      uses: super-linter/super-linter@v5.4.3
+      env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

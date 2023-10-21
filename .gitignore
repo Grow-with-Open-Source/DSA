@@ -1,0 +1,29 @@
+# Ignore compiled object files, executables, and libraries for C and C++
+*.o
+*.out
+*.a
+*.so
+*.dll
+
+# Ignore generated Java class files
+*.class
+
+# Ignore Node.js modules and dependencies
+node_modules/
+
+# Ignore Python bytecode files and cache
+__pycache__/
+*.pyc
+
+# Ignore IntelliJ IDEA project files
+.idea/
+
+# Ignore Visual Studio Code project files
+.vscode/
+
+# Ignore editor-specific temporary files
+*.swp
+*~
+
+# Ignore MacOS default files
+.DS_Store
