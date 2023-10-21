@@ -215,10 +215,6 @@ class UpdateFileContent:
 					sub_value.sort()
 			table_of_content[key] = OrderedDict(sorted(value.items()))
 
-		# Table of content header
-		table_of_content_header = ['<ul>\n']
-		table_of_content_footer = ['</ul>\n']
-
 		# Updating lines based on the extracted data
 		for core, data in table_of_content.items():
 
@@ -228,33 +224,27 @@ class UpdateFileContent:
 
 			# Setting Main Heading (Only for Root)
 			if condition is None:
-				updated_lines.append(f'\t<li><a href="{core}" href="goto {core}"><b>{core}</b></a></li>\n')
+				updated_lines.append(f'- [__{core}__]({core} "goto {core}")\n')
 
 			# Adding all headings
 			for  heading, sub_heading_list in data.items():
 				if condition is None:
-					updated_lines.append(f'\t\t<ul>\n')
-					updated_lines.append(f'\t\t\t<li><a href="{core}/{heading}" title="goto {heading}">{heading}</a></li>\n')
+					updated_lines.append(f'\t- [{heading}]({core}/{heading} "goto {heading}")\n')
 				else:
-					updated_lines.append(f'\t<li><a href="{heading}" title="goto {heading}">{heading}</a></li>\n')
+					updated_lines.append(f'- [__{heading}__]({heading} "goto {heading}")\n')
 				if sub_heading_list is not None:
 					for sub_heading in sub_heading_list:
 						if condition is None:
-							updated_lines.append(f'\t\t\t<ul>\n')
-							updated_lines.append(f'\t\t\t\t<li><a href="{core}/{heading}/{sub_heading}" title="goto {sub_heading}">{sub_heading}</a></li>\n')
-							updated_lines.append(f'\t\t\t</ul>\n')
+							updated_lines.append(f'\t\t- [{sub_heading}]({core}/{heading}/{sub_heading} "goto {sub_heading}")\n')
 						else:
-							updated_lines.append(f'\t<ul>\n')
-							updated_lines.append(f'\t\t<li><a href="{heading}/{sub_heading}" title="goto {sub_heading}">{sub_heading}</a></li>\n')
-							updated_lines.append(f'\t</ul>\n')
-				if condition is None:
-					updated_lines.append(f'\t\t</ul>\n')
+							updated_lines.append(f'\t- [{sub_heading}]({heading}/{sub_heading} "goto {sub_heading}")\n')
 
 		# Updating the lines with updated data
-		self.lines[table_of_content_start+1:table_of_content_end] = table_of_content_header + updated_lines + table_of_content_footer
+		self.lines[table_of_content_start+1:table_of_content_end] = updated_lines
 
 		# Printing Success Message
 		print('Successfully updated the table of content !!!...')
+
 
 
 def main():
@@ -264,8 +254,10 @@ def main():
 
 	# Setting path for the log JSON file
 	ROOT_INDEX_FILE_PATH = 'index.md'
-	THEORY_INDEX_FILE_PATH = 'Theory/README.md'
-	SOLVED_PROBLEM_INDEX_FILE_PATH = 'Solved-Problems/README.md'
+	THEORY_INDEX_FILE_PATH = 'Theory/index.md'
+	THEORY_README_FILE_PATH = 'Theory/README.md'
+	SOLVED_PROBLEM_INDEX_FILE_PATH = 'Solved-Problems/index.md'
+	SOLVED_PROBLEM_README_FILE_PATH = 'Solved-Problems/README.md'
 	CONTRIBUTORS_LOG = '.github/data/contributors-log.json'
 
 	# Retrieving data from log file
@@ -279,7 +271,10 @@ def main():
 	# Updating All required files
 	UpdateFileContent(ROOT_INDEX_FILE_PATH)
 	UpdateFileContent(THEORY_INDEX_FILE_PATH, lambda core: core == 'Theory')
+	UpdateFileContent(THEORY_README_FILE_PATH, lambda core: core == 'Theory')
 	UpdateFileContent(SOLVED_PROBLEM_INDEX_FILE_PATH, lambda core: core == 'Solved-Problems')
+	UpdateFileContent(SOLVED_PROBLEM_README_FILE_PATH, lambda core: core == 'Solved-Problems')
+
 
 if __name__ == '__main__':
 	main()
