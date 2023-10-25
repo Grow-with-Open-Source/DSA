@@ -1,7 +1,13 @@
 Problem Name: 844.Backspace String Compare
+
 Approach: Using Stacks
+
 Difficulty: Easy
+
 Link: https://leetcode.com/problems/backspace-string-compare/
+
+
+Explanation:
 
 In this problem, we are given two strings, s and t, where '#' represents a backspace character. We need to determine if these two strings are equal after simulating the backspace characters.
 
