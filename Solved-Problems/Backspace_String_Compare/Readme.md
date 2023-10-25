@@ -1,3 +1,5 @@
+# Backspace String Compare
+
 Problem Name: 844.Backspace String Compare
 
 Approach: Using Stacks
