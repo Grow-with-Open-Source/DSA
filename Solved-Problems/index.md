@@ -5,6 +5,7 @@ Welcome to **DSA's Solved-Problems**, This is the place where you showcase your 
 # Table of Content
 
 <!-- TABLE OF CONTENT BEGINS -->
+- [__Backspace_String_Compare__](Backspace_String_Compare "goto Backspace_String_Compare")
 <!-- TABLE OF CONTENT ENDS -->
 
 # Table of Contribution
@@ -12,7 +13,7 @@ Welcome to **DSA's Solved-Problems**, This is the place where you showcase your 
 <!-- TABLE OF CONTRIBUTORS BEGINS -->
 | Contribution Title | Contributor Names | Pull Requests | Demo |
 | --- | --- | --- | --- |
-| - | - | - | - |
+| Backspace_String_Compare | [rahulch-1](https://github.com/rahulch-1 "goto rahulch-1 profile") | [#4](https://github.com/Grow-with-Open-Source/DSA/pull/4 "visit pr \#4") | [./Solved-Problems/Backspace_String_Compare/](Solved-Problems/Backspace_String_Compare "view the result of Backspace_String_Compare") |
 <!-- TABLE OF CONTRIBUTORS ENDS -->
 
 # Thank you Contributors

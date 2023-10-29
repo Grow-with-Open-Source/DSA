@@ -7,6 +7,7 @@ Welcome to **Data Structures and Algorithms**, your friendly initiation into the
 <!-- TABLE OF CONTENT BEGINS -->
 - [__Theory__](Theory "goto Theory")
 - [__Solved-Problems__](Solved-Problems "goto Solved-Problems")
+	- [Backspace_String_Compare](Solved-Problems/Backspace_String_Compare "goto Backspace_String_Compare")
 <!-- TABLE OF CONTENT ENDS -->
 
 # Table of Contribution
@@ -16,7 +17,8 @@ Welcome to **Data Structures and Algorithms**, your friendly initiation into the
 <!-- TABLE OF CONTRIBUTORS BEGINS -->
 | Contribution Title | Core Contribution | Contributor Names | Pull Requests | Demo |
 | --- | --- | --- | --- | --- |
-| {init} | [Repo](Repo "goto Repo") | [iamwatchdogs](https://github.com/iamwatchdogs "goto iamwatchdogs profile") | [#1](https://github.com/Grow-with-Open-Source/DSA/pull/1 "visit pr #1") | [/Grow-with-Open-Source/DSA/](https://github.com/Grow-with-Open-Source/DSA "view the result of {init}") |
+| {init} | [Repo](Repo "goto Repo") | [iamwatchdogs](https://github.com/iamwatchdogs "goto iamwatchdogs profile") | [#2](https://github.com/Grow-with-Open-Source/DSA/pull/2 "visit pr \#2") | [/Grow-with-Open-Source/DSA/](https://github.com/Grow-with-Open-Source/DSA "view the result of {init}") |
+| Backspace_String_Compare | [Solved-Problems](Solved-Problems "goto Solved-Problems") | [rahulch-1](https://github.com/rahulch-1 "goto rahulch-1 profile") | [#4](https://github.com/Grow-with-Open-Source/DSA/pull/4 "visit pr \#4") | [./Solved-Problems/Backspace_String_Compare/](Solved-Problems/Backspace_String_Compare "view the result of Backspace_String_Compare") |
 <!-- TABLE OF CONTRIBUTORS ENDS -->
 
 </div>

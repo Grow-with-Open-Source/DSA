@@ -9,5 +9,16 @@
       "2"
     ],
     "demo-path": "https://github.com/Grow-with-Open-Source/DSA"
+  },
+  "Backspace_String_Compare": {
+    "contributor-name": [
+      "rahulch-1"
+    ],
+    "core": "Solved-Problems",
+    "specificity": "Backspace_String_Compare",
+    "pull-request-number": [
+      "4"
+    ],
+    "demo-path": "Solved-Problems/Backspace_String_Compare"
   }
 }
