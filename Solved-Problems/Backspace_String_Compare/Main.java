@@ -1,3 +1,12 @@
+
+//Problem Name: 844.Backspace String Compare
+
+//Approach: Using Stacks
+
+//Difficulty: Easy
+
+//Link: https://leetcode.com/problems/backspace-string-compare/
+
 import java.util.Stack;
 
 class Main {
