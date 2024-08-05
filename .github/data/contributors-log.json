@@ -20,5 +20,16 @@
       "4"
     ],
     "demo-path": "Solved-Problems/Backspace_String_Compare"
+  },
+  "Valid_Anagram": {
+    "contributor-name": [
+      "shreyasrajiv327"
+    ],
+    "core": "Solved-Problems",
+    "specificity": "Valid_Anagram",
+    "pull-request-number": [
+      "5"
+    ],
+    "demo-path": "Solved-Problems/Valid_Anagram"
   }
 }
