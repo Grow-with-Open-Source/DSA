@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-class Solution {
+class Main {
     public boolean isAnagram(String s, String t) {
         if(s.length() != t.length())
         {
