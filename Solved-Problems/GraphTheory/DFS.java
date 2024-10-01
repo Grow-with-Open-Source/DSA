@@ -9,8 +9,8 @@ public class DFS {
 
   public static void main(String[] args) {
     int vertex = 7;
-    @SuppressWarnings("unchecked") ArrayList<Edge> graph[] = new ArrayList[vertex];
-    boolean vis[] = new boolean[vertex];
+    @SuppressWarnings("unchecked") ArrayList<Edge> [] graph = new ArrayList[vertex];
+    boolean [] vis = new boolean[vertex];
 
     createGraph(graph);
 
@@ -28,7 +28,7 @@ public class DFS {
     }
   }
 
-  public static void createGraph(ArrayList<Edge> graph[]) {
+   public static void createGraph(ArrayList<Edge> [] graph) {
     for (int i = 0; i < graph.length; i++) {
       graph[i] = new ArrayList<Edge>();
     }
@@ -56,7 +56,7 @@ public class DFS {
     graph[6].add(new Edge(6, 5));
   }
 
-  public static void depthFirst(ArrayList<Edge> graph[], int curr, boolean vis[]) {
+  public static void depthFirst(ArrayList<Edge> [] graph, int curr, boolean [] vis) {
     System.out.println(curr);
     vis[curr] = true;
     for (int i = 0; i < graph[curr].size(); i++) {
