@@ -68,7 +68,7 @@ jobs:
                     checks['javascript']='true'
                   elif path.endswith('.py'):
                     checks['python']='true'
-                  elif '.' in path.split('/')[-1] and not (path.startswith('.github') or path.endswith('.md')):
+                  elif '.' in path.split('/')[-1] and not path.endswith('.md'):
                     checks['other']='true'
 
           # Setting output variables based on file extensions
@@ -106,18 +106,15 @@ jobs:
             (needs.python-linter.result == 'skipped' || needs.checkout.outputs.needs_python_linting == 'false'))
           }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
-      statuses: write
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Super-linter
-        uses: super-linter/super-linter@v7.1.0
-        env:
+    - name: Checking out the repo
+      uses: actions/checkout@v4.1.1
+      with:
+       fetch-depth: 0
+       ref: ${{ github.event.pull_request.head.ref }}
+    - name: Super Linter
+      uses: super-linter/super-linter@v5.4.3
+      env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
