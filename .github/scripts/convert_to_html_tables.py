@@ -21,6 +21,18 @@ class UpdateFileContent:
 	REPO_NAME = None
 
 	def __init__(self, FILE_PATH, condition=None):
+		"""
+		Constructor method of UpdateFileContent class.
+
+		Parameters
+		----------
+		FILE_PATH : str
+			Path of the file to be updated.
+		condition : callable, optional
+			Condition to filter the contributors based on.
+			Defaults to None, which means no filtering.
+
+		"""
 
 		# Displaying starting Message
 		print(f'\n--- Updating {FILE_PATH} ---\n')
@@ -40,6 +52,14 @@ class UpdateFileContent:
 
 
 	def get_lines(self):
+		"""
+		Reads the lines from the file located at `self.FILE_PATH`.
+
+		Returns
+		-------
+		list
+			List of lines read from the file.
+		"""
 
 		# Reading lines from the file
 		with open(self.FILE_PATH, 'r') as file:
@@ -48,6 +68,17 @@ class UpdateFileContent:
 		return lines
 
 	def write_lines_into_file(self):
+		"""
+		Writes the lines to the file located at `self.FILE_PATH`.
+
+		Parameters
+		----------
+		None
+
+		Returns
+		-------
+		None
+		"""
 
 		# Updating the target file
 		with open(self.FILE_PATH, 'w') as file:
@@ -57,6 +88,23 @@ class UpdateFileContent:
 		print(f"Updated '{self.FILE_PATH}' Successfully")
 
 	def find_table_points(self, search_type):
+		"""
+		Finds the starting and ending points of a table in the file located at
+		`self.FILE_PATH` based on the `search_type`.
+
+		Parameters
+		----------
+		search_type : str
+			Valid values are 'contributors' and 'table-of-content'.
+
+		Returns
+		-------
+		tuple
+			A tuple of `(table_starting_point, table_ending_point)` where
+			`table_starting_point` is the index of the line where the table
+			starts and `table_ending_point` is the index of the line where the
+			table ends.
+		"""
 
 		# Setting default return values
 		table_starting_point = None
@@ -97,6 +145,16 @@ class UpdateFileContent:
 		return (table_starting_point, table_ending_point)
 
 	def update_table_of_contributors(self, condition):
+		"""
+		Update the table of contributors based on the condition.
+
+		Parameters
+		----------
+		condition : callable
+			A function that takes one argument (i.e., the core contribution)
+			and returns True if the contribution should be included in the table, or
+			False otherwise. If None, then all core contributions are included.
+		"""
 
 		# Calculating stating and ending points of the targeted table
 		table_of_contributors_start, table_of_contributors_end = self.find_table_points('contributors')
@@ -135,7 +193,7 @@ class UpdateFileContent:
 			# Processing core contribution
 			core_contribution = details['core']
 			if condition is None:
-				core_contribution_output = f'<a href="{core_contribution}" title="goto {core_contribution}">{core_contribution}</a>'
+				core_contribution_output = f'<a href="{core_contribution}" title="goto {core_contribution}">{core_contribution}</a>' if core_contribution != 'Repo' else core_contribution
 
 			# Processing pull-requests
 			pull_requests = details['pull-request-number']
@@ -150,6 +208,12 @@ class UpdateFileContent:
 			demo_path_output = f'<a href="{demo_path}" title="view the result of {specificity}">./{core_contribution}/{specificity}</a>' 
 			if title == 'root' or title == '{init}':
 				demo_path_output = f'<a href="{demo_path}" title="view the result of {title}">/{self.REPO_NAME}/</a>'
+			elif title == '{workflows}':
+				demo_path_output = f'<a href="{demo_path}" title="view the result of {title}">/{self.REPO_NAME}/.github/workflows</a>'
+			elif title == '{scripts}':
+				demo_path_output = f'<a href="{demo_path}" title="view the result of {title}">/{self.REPO_NAME}/.github/scripts</a>'
+			elif title == '{others}':
+				demo_path_output = f'<a href="{demo_path}" title="view the result of {title}">/{self.REPO_NAME}/.github/others</a>'
 
 			# Appending all data together
 			updated_lines.append('\t<tr align="center">\n')
@@ -184,6 +248,22 @@ class UpdateFileContent:
 		print('Successfully updated the contributor details !!!...')
 
 	def update_table_of_content(self, condition):
+		"""
+		Update the table of content in the markdown file based on the specified condition.
+
+		Args:
+			condition (callable): A function that takes one argument (i.e., the core contribution)
+				and returns True if the contribution should be included in the table, or
+				False otherwise. If None, then all core contributions are included.
+		
+		The method calculates the starting and ending points of the targeted table and
+		initializes necessary variables to store the table of content. It processes the 
+		data from `self.DATA` to extract and organize the content by core and specificity. 
+		The extracted data is sorted and used to update the markdown file with a structured 
+		list of links representing the table of content. The links are formatted based on 
+		whether a condition is given. Finally, the method updates the markdown lines and 
+		prints a success message upon completion.
+		"""
 
 		# Calculating stating and ending points of the targeted table
 		table_of_content_start, table_of_content_end = self.find_table_points('table-of-content')
@@ -248,6 +328,15 @@ class UpdateFileContent:
 
 
 def main():
+	"""
+	The main function of the script is responsible for updating the root index file and the index files of `Theory` and `Solved-Problems` directories.
+
+	The function takes in environment variables `REPO_NAME` and uses it to fetch the required data from the contributors log file.
+
+	The function then updates the root index file and the index files of `Theory` and `Solved-Problems` directories using the fetched data.
+
+	The function also prints out a success message at the end.
+	"""
 
 	# Retrieving Environmental variables
 	REPO_NAME = os.environ.get('REPO_NAME')
