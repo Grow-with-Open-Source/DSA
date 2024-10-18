@@ -31,5 +31,16 @@
       "5"
     ],
     "demo-path": "Solved-Problems/Valid_Anagram"
+  },
+  "{others}": {
+    "contributor-name": [
+      "iamwatchdogs"
+    ],
+    "core": "Repo",
+    "specificity": "Maintenance",
+    "pull-request-number": [
+      "10"
+    ],
+    "demo-path": "https://github.com/Grow-with-Open-Source/DSA/.github"
   }
 }
