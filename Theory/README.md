@@ -14,6 +14,15 @@ Welcome to **DSA's Theory**, this very directory serves as a treasure trove of w
 ## Table of Content
 
 <!-- TABLE OF CONTENT BEGINS -->
+- **Complexity Analysis**
+  - [Complexity Analysis](./Complexity-Analysis/README.md)
+
+- **Data Structures**
+  - [Graphs](./Data-Structures/Graphs/README.md)
+  - [Linked Lists](./Data-Structures/Linked-Lists/README.md)
+  - [Queues](./Data-Structures/Queues/README.md)
+  - [Stacks](./Data-Structures/Stacks/README.md)
+  - [Trees](./Data-Structures/Trees/README.md)
 <!-- TABLE OF CONTENT ENDS -->
 
 ## Table of Contribution
@@ -21,7 +30,8 @@ Welcome to **DSA's Theory**, this very directory serves as a treasure trove of w
 <!-- TABLE OF CONTRIBUTORS BEGINS -->
 | Contribution Title | Contributor Names | Pull Requests | Demo |
 | --- | --- | --- | --- |
-| - | - | - | - |
+| --- | --- | --- | --- |
+| Complexity Analysis and Data Structures| ghruank | #13 | - |
 <!-- TABLE OF CONTRIBUTORS ENDS -->
 
 ## Thank you Contributors
