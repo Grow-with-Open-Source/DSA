@@ -43,6 +43,7 @@ Welcome to **DSA's Solved-Problems**, This is the place where you showcase your 
 
 <!-- TABLE OF CONTENT BEGINS -->
 - [__Backspace_String_Compare__](Backspace_String_Compare "goto Backspace_String_Compare")
+- [__Longest_Substring_Without_Repeating_Characters__](Longest_Substring_Without_Repeating_Characters "goto Longest_Substring_Without_Repeating_Characters")
 - [__Valid_Anagram__](Valid_Anagram "goto Valid_Anagram")
 <!-- TABLE OF CONTENT ENDS -->
 
@@ -53,6 +54,7 @@ Welcome to **DSA's Solved-Problems**, This is the place where you showcase your 
 | --- | --- | --- | --- |
 | Backspace_String_Compare | [rahulch-1](https://github.com/rahulch-1 "goto rahulch-1 profile") | [#4](https://github.com/Grow-with-Open-Source/DSA/pull/4 "visit pr \#4") | [./Solved-Problems/Backspace_String_Compare/](Solved-Problems/Backspace_String_Compare "view the result of Backspace_String_Compare") |
 | Valid_Anagram | [shreyasrajiv327](https://github.com/shreyasrajiv327 "goto shreyasrajiv327 profile") | [#5](https://github.com/Grow-with-Open-Source/DSA/pull/5 "visit pr \#5") | [./Solved-Problems/Valid_Anagram/](Solved-Problems/Valid_Anagram "view the result of Valid_Anagram") |
+| Longest_Substring_Without_Repeating_Characters | [RohithaAiswarya16](https://github.com/RohithaAiswarya16 "goto RohithaAiswarya16 profile") | [#12](https://github.com/Grow-with-Open-Source/DSA/pull/12 "visit pr \#12") | [./Solved-Problems/Longest_Substring_Without_Repeating_Characters/](https://github.com/Grow-with-Open-Source/DSA/tree/main/Solved-Problems/Longest_Substring_Without_Repeating_Characters "view the result of Longest_Substring_Without_Repeating_Characters") |
 <!-- TABLE OF CONTRIBUTORS ENDS -->
 
 ## Thank you Contributors

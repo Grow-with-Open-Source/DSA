@@ -42,5 +42,16 @@
       "10"
     ],
     "demo-path": "https://github.com/Grow-with-Open-Source/DSA/.github"
+  },
+  "Longest_Substring_Without_Repeating_Characters": {
+    "contributor-name": [
+      "RohithaAiswarya16"
+    ],
+    "core": "Solved-Problems",
+    "specificity": "Longest_Substring_Without_Repeating_Characters",
+    "pull-request-number": [
+      "12"
+    ],
+    "demo-path": "https://github.com/Grow-with-Open-Source/DSA/tree/main/Solved-Problems/Longest_Substring_Without_Repeating_Characters"
   }
 }
