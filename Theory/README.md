@@ -18,18 +18,17 @@ Welcome to **DSA's Theory**, this very directory serves as a treasure trove of w
   - [Complexity Analysis](./Complexity-Analysis/README.md)
 
 - **Data Structures**
-  - [Graphs](./Data-Structures/Graphs/README.md)
-  - [Linked Lists](./Data-Structures/Linked-Lists/README.md)
-  - [Queues](./Data-Structures/Queues/README.md)
   - [Stacks](./Data-Structures/Stacks/README.md)
+  - [Queues](./Data-Structures/Queues/README.md)
+  - [Linked Lists](./Data-Structures/Linked-Lists/README.md)
   - [Trees](./Data-Structures/Trees/README.md)
+  - [Graphs](./Data-Structures/Graphs/README.md)
 <!-- TABLE OF CONTENT ENDS -->
 
 ## Table of Contribution
 
 <!-- TABLE OF CONTRIBUTORS BEGINS -->
 | Contribution Title | Contributor Names | Pull Requests | Demo |
-| --- | --- | --- | --- |
 | --- | --- | --- | --- |
 | Complexity Analysis and Data Structures| ghruank | #13 | - |
 <!-- TABLE OF CONTRIBUTORS ENDS -->
